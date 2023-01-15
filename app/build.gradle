@@ -14,16 +14,19 @@
  * limitations under the License.
  */
 
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'androidx.navigation.safeargs.kotlin'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+}
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
     defaultConfig {
         applicationId 'com.example.android.codelabs.navigation'
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -45,13 +48,14 @@ android {
     productFlavors {
     }
 
-    lintOptions {
-        abortOnError false
-    }
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
     }
+    lint {
+        abortOnError false
+    }
+    namespace 'com.example.android.codelabs.navigation'
 }
 
 dependencies {
