@@ -30,10 +30,12 @@ import android.widget.TextView
 import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Fragment used to show how to deep link to a destination
  */
+@AndroidEntryPoint
 class DeepLinkFragment : Fragment() {
     override fun onCreateView(
             inflater: LayoutInflater,

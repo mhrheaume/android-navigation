@@ -22,10 +22,12 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Fragment used to show how to navigate to another destination
  */
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
     override fun onCreateView(
             inflater: LayoutInflater,

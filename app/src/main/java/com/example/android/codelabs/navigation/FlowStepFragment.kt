@@ -23,10 +23,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Presents how multiple steps flow could be implemented.
  */
+@AndroidEntryPoint
 class FlowStepFragment : Fragment() {
 
     override fun onCreateView(
