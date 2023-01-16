@@ -36,8 +36,6 @@ class FlowStepFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setHasOptionsMenu(true)
-
         val safeArgs: FlowStepFragmentArgs by navArgs()
         val flowStepNumber = safeArgs.flowStepNumber
 

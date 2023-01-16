@@ -17,29 +17,39 @@
 package com.example.android.codelabs.navigation
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * Fragment used to show how to navigate to another destination
  */
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
+    @Inject lateinit var menuHost: MenuHost
+    @Inject lateinit var menuProvider: MenuProvider
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.home_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        menuHost.addMenuProvider(menuProvider, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         val options = navOptions {
             anim {
@@ -57,11 +67,7 @@ class HomeFragment : Fragment() {
 
         val actionButton = view.findViewById<Button>(R.id.navigate_action_button)
         actionButton?.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.nextAction(), null)
+            findNavController().navigate(HomeFragmentDirections.nextAction(), options)
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_menu, menu)
     }
 }
