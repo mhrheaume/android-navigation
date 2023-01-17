@@ -70,7 +70,7 @@
 
     <fragment
         android:id="@+id/deeplink_dest"
-        android:name="com.example.android.codelabs.navigation.DeepLinkFragment"
+        android:name="com.example.android.codelabs.navigation.deeplink.DeepLinkFragment"
         android:label="@string/deeplink"
         tools:layout="@layout/deeplink_fragment">
 

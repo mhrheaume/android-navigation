@@ -39,7 +39,7 @@
 
         </activity>
 
-        <receiver android:name=".DeepLinkAppWidgetProvider"
+        <receiver android:name=".deeplink.DeepLinkAppWidgetProvider"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

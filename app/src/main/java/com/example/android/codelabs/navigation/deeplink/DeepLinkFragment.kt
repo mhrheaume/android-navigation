@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.codelabs.navigation
+package com.example.android.codelabs.navigation.deeplink
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -29,14 +29,22 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.example.android.codelabs.navigation.R
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 /**
  * Fragment used to show how to deep link to a destination
  */
 @AndroidEntryPoint
 class DeepLinkFragment : Fragment() {
+    private val viewModel: DeepLinkViewModel by viewModels()
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -48,8 +56,14 @@ class DeepLinkFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val textView = view.findViewById<TextView>(R.id.text)
-        textView.text = arguments?.getString("myarg")
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.argument.collect {
+                    val textView = view.findViewById<TextView>(R.id.text)
+                    textView.text = arguments?.getString("myarg")
+                }
+            }
+        }
 
         val notificationButton = view.findViewById<Button>(R.id.send_notification_button)
         notificationButton.setOnClickListener {
